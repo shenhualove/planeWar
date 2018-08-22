@@ -1,0 +1,34 @@
+{
+  "name": "planewar",
+  "version": "1.0.0",
+  "description": "飞机大战游戏",
+  "main": "webpack.config.js",
+  "scripts": {
+    "dev": "export NODE_ENV=dev && webpack --mode  development --colors --watch",
+    "dist": "export NODE_ENV=dist && webpack --mode  production --colors"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shenhualove/planeWar.git"
+  },
+  "keywords": [
+    "phaser"
+  ],
+  "author": "shenhua",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/shenhualove/planeWar/issues"
+  },
+  "homepage": "https://github.com/shenhualove/planeWar#readme",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.4",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-runtime": "^6.26.0",
+    "file-loader": "^2.0.0",
+    "html-webpack-plugin": "^3.2.0",
+    "webpack": "^4.8.3",
+    "webpack-cli": "^2.1.3"
+  }
+}
