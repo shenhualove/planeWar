@@ -1,6 +1,11 @@
 # planeWar
 基于phaser.js游戏框架开发的 飞机大战 入门游戏示例 
 
+# 运行
+下载后 cd server && npm install && npm start 
+然后 回到项目根目录 npm run dev 
+浏览器运行 http://localhost:3000/ 即可
+
 # 功能:
 - [x] 敌机类型
 - [x] 摧毁特效
