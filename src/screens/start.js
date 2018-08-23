@@ -5,23 +5,24 @@
  */
 class Start {
     create(game){
-        let start_man = game.add.image(0,0,'start_man');
-        let start_women = game.add.image(0,game.world.height/2,'start_women');
+        let startPlane_1 = game.add.image(0,0,'startPlayer_1');
+        let startPlane_2 = game.add.image(0,game.world.height/3,'startPlayer_2');
+        let startPlane_3 = game.add.image(0,game.world.height/3*2,'startPlayer_3');
 
         //设置宽高
-        start_man.width = start_women.width = game.world.width;
-        start_man.height = start_women.height = game.world.height/2;
+        startPlane_1.width = startPlane_2.width = startPlane_3.width =game.world.width;
+        startPlane_1.height = startPlane_2.height = startPlane_3.height = game.world.height/3;
 
         //绑定按下事件
-        start_man.inputEnabled = true;
-        start_women.inputEnabled = true;
-        start_man.events.onInputDown.add(()=>this.jumpNextScreen('man',game));
-        start_women.events.onInputDown.add(()=>this.jumpNextScreen('women',game));
+        startPlane_1.inputEnabled = startPlane_2.inputEnabled = startPlane_3.inputEnabled = true;
+        startPlane_1.events.onInputDown.add(()=>this.jumpNextScreen('userPlane_1'));
+        startPlane_2.events.onInputDown.add(()=>this.jumpNextScreen('userPlane_2'));
+        startPlane_3.events.onInputDown.add(()=>this.jumpNextScreen('userPlane_3'));
     }
 
-    jumpNextScreen(sex,game){
+    jumpNextScreen(name){
         //设置不同战机
-        userData.sex = sex;
+        userData.plane = name;
 
         //开启第一关
         game.state.start('level_1');
