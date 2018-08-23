@@ -38,7 +38,7 @@ module.exports = {
                 }
             },
             {
-                test:/\.(png|svg|jpg|gif|eot|woff|ttf)$/,
+                test:/\.(png|svg|jpg|gif|eot|woff|ttf|mp3)$/,
                 use:['file-loader?name=[path][name]_[hash:8].[ext]&context=./src/assets&outputPath=assets/']
             },
             { test: /pixi\.js/, loader: 'expose-loader?PIXI' },
