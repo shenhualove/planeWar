@@ -8,6 +8,9 @@ import 'p2';
 import Phaser   from 'phaser';
 import Start    from './screens/start';
 import Level_1  from './screens/level_1';
+import Level_2  from './screens/level_2';
+import Level_3  from './screens/level_3';
+import Level_4  from './screens/level_4';
 import End      from './screens/end';
 
 class GameMain {
@@ -52,6 +55,7 @@ class GameMain {
 
         //敌人子弹
         game.load.image('enemyBullet',require('./assets/sprites/enemyBullet.png'));
+        game.load.image('bossBullet',require('./assets/sprites/bossBullet.png'));
 
         //我的子弹
         game.load.image('userBullet_1',require('./assets/sprites/userBullet_1.png'));
@@ -65,6 +69,10 @@ class GameMain {
         game.load.audio('gameBg',require('./assets/sounds/gameBg.mp3'));
         game.load.audio('getMoney',require('./assets/sounds/getMoney.mp3'));
         game.load.audio('planeBoom',require('./assets/sounds/planeBoom.mp3'));
+
+        //血条
+        game.load.image('bloodFull',require('./assets/sprites/bloodFull.png'));
+        game.load.image('bloodEmpty',require('./assets/sprites/bloodEmpty.png'));
 
         //加载资源进度条
         let progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
@@ -101,5 +109,8 @@ window.onload = ()=>{
     //添加游戏场景
     game.state.add('start', new Start());
     game.state.add('level_1', new Level_1());
+    game.state.add('level_2', new Level_2());
+    game.state.add('level_3', new Level_3());
+    game.state.add('level_4', new Level_4());
     game.state.add('end', new End());
 }

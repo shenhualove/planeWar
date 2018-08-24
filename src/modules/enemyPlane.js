@@ -9,6 +9,7 @@ class EnemyPlane {
         this.plan = null;
         this.maxWidth = 0;
         this.speed = 400;
+        this.hp = 1;
     }
 
     init(options){
@@ -19,6 +20,9 @@ class EnemyPlane {
         this.plan.setAll('anchor.y', 0.5);
         this.plan.setAll('outOfBoundsKill', true);
         this.plan.setAll('checkWorldBounds', true);
+        if(options.hp){
+            this.hp = options.hp;
+        }
 
         //产生敌人
         this.maxWidth = game.width - game.cache.getImage(options.pic).width;
@@ -31,6 +35,7 @@ class EnemyPlane {
     create(){
         let enemy = this.plan.getFirstExists(false);
         if(enemy){
+            enemy.hp = this.hp;
             enemy.reset(game.rnd.integerInRange(0, this.maxWidth), 0);
             enemy.body.velocity.y = this.speed;
         }

@@ -42,14 +42,14 @@ class End {
         //重新试玩按钮
         let replayButton = game.add.button(game.world.centerX, 900, 'replayButton', this.replay);
         replayButton.anchor.setTo(0.5, 0.5);
-        console.log(replayButton)
         replayButton.scale.x = 3;
         replayButton.scale.y = 3;
 
     }
 
     replay(){
-        game.state.start('start');
+        game.time.events.start();
+        game.state.start('start',false,true);
     }
 }
 
