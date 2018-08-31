@@ -33,7 +33,7 @@ class BossPlane {
 
     fireBullet(enemyBullet){
         //发射子弹
-        this.plan.forEachExists((enemy)=>{
+        this.plan&&this.plan.forEachExists((enemy)=>{
             let width = game.world.width;
             for(let i = 0;i<16;i++){
                 let bullet = enemyBullet.getFirstExists(false);

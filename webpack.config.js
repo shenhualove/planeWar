@@ -20,7 +20,7 @@ module.exports = {
     devtool:'cheap-module-source-map',
     output:{
         path:sourcePath[WEBPACK_PRO_ENV],
-        publicPath:'/',
+        publicPath:'./',
         filename:'js/[name]_[chunkhash:8].js',
         chunkFilename:'js/common/[name]_[chunkhash:8].js'
     },

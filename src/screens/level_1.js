@@ -208,8 +208,9 @@ class Level_1 {
         game.sound.play('planeBoom');
         userData.source = this.userScore.scoreNum;
         userData.shootPlane = this.userShoot.scoreNum;
-        game.state.start('end',false,true);
         this.showBoss = false;
+        game.state.start('end',false,true);
+
     }
 
     getPlaneScore(name){

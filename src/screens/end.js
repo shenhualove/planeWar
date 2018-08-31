@@ -48,6 +48,7 @@ class End {
     }
 
     replay(){
+        window.location.reload();
         game.time.events.start();
         userData = {};
         game.state.start('start',false,true);
