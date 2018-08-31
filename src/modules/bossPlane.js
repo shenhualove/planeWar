@@ -27,28 +27,37 @@ class BossPlane {
         if(enemy){
             enemy.hp = this.hp;
             enemy.reset(options.width,options.height);
+            this.move(enemy,options.height);
         }
     }
 
     fireBullet(enemyBullet){
         //发射子弹
         this.plan.forEachExists((enemy)=>{
-            for(let i = 0;i<30;i++){
+            let width = game.world.width;
+            for(let i = 0;i<16;i++){
                 let bullet = enemyBullet.getFirstExists(false);
                 if(bullet) {
                     if(game.time.now > (enemy['bulletTime'+i] || 0)) {
                         bullet.angle =180;
                         bullet.reset(enemy.x, enemy.y + 38);
-                        bullet.body.velocity.y = 800;
+                        bullet.body.velocity.y = 600;
                         if(i!==0){
-                            bullet.body.velocity.x = (this.left?Math.floor(Math.random()*-1000):Math.floor(Math.random()*100)*i);
+                            bullet.body.velocity.x = (i<8?-(width/8*i):width/8*(i-7));
                         }
-                        enemy['bulletTime'+i] = game.time.now + 1500;
+                        enemy['bulletTime'+i] = game.time.now + 1800;
                     }
                 }
             }
             this.left = !this.left;
         });
+    }
+
+    move(enemy,height){
+         setTimeout(()=>{
+             game.add.tween(enemy).to( { x: game.rnd.integerInRange(100, game.world.width-300) }, 2000, null, true);
+             this.move(enemy,height);
+         },2000);
     }
 }
 

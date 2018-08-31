@@ -49,6 +49,7 @@ class End {
 
     replay(){
         game.time.events.start();
+        userData = {};
         game.state.start('start',false,true);
     }
 }

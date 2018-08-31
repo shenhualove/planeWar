@@ -9,6 +9,7 @@ import Bullet     from '../modules/bullet';
 import Explosion  from '../modules/explosion';
 import UserScore  from '../modules/score';
 import BossPlane  from '../modules/bossPlane';
+import Resource   from '../modules/resource';
 
 class Level_1 {
     constructor(){
@@ -26,6 +27,8 @@ class Level_1 {
         this.userBlood = null;
         this.bossBlood = null;
         this.theScore = 0;
+        this.gem = null;
+        this.gasoline = null;
     }
 
     create(){
@@ -86,6 +89,18 @@ class Level_1 {
             hp:4
         });
 
+        //创建资源
+        this.gem = new Resource();
+        this.gem.init({
+            pic:'baoshi',
+            loopTime:5000
+        });
+        this.gasoline = new Resource();
+        this.gasoline.init({
+            pic:'gasoline',
+            loopTime:8000
+        });
+
         //显示BOSS
         this.boss = new BossPlane();
 
@@ -144,6 +159,9 @@ class Level_1 {
         //敌人子弹碰撞飞机
         game.physics.arcade.overlap([this.enemyBullet, this.bossBullet], this.userPlan.plan, this.hitPlayer, null, this);
 
+        //飞机碰撞到资源
+        game.physics.arcade.overlap([this.gem.items,this.gasoline.items], this.userPlan.plan, this.getResource, null, this);
+
         //是否出现BOSS
         this.checkShowBoss();
 
@@ -171,14 +189,14 @@ class Level_1 {
     }
 
     crashPlayer(player,enemy){
-        this.theScore -=20;
+        this.userPlan.level = 1;
         this.enemyIsKill(enemy) && enemy.kill();
         this.enemyIsKill(player) && this.playerDead(player);
     }
 
     hitPlayer(player,enemyBullet){
         enemyBullet.kill();
-        this.theScore -=20;
+        this.userPlan.level = 1;
         if(this.enemyIsKill(player)){
             this.explosion.play(player);
             this.playerDead(player);
@@ -258,19 +276,29 @@ class Level_1 {
     }
 
     checkPlanLevel(){
-        if(this.theScore > 60){
-            this.userPlan.level = 2;
-        }else{
-            this.userPlan.level = 1;
-        }
+
 
     }
 
     killBoss(){
         if(this.boss.blood === 0){
             game.time.events.start();
+            this.showBoss = false;
             game.state.start('level_3');
         }
+    }
+
+    getResource(player,item){
+        if(item.key === 'gasoline'){
+            this.userPlan.level = 2;
+        }
+        if(item.key === 'baoshi'){
+            player.hp++;
+            if(player.hp>this.userPlan.hp){
+                player.hp = this.userPlan.hp;
+            }
+        }
+        item.kill();
     }
 
 }

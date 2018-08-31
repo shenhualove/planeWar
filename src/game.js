@@ -74,6 +74,10 @@ class GameMain {
         game.load.image('bloodFull',require('./assets/sprites/bloodFull.png'));
         game.load.image('bloodEmpty',require('./assets/sprites/bloodEmpty.png'));
 
+        //补给资源
+        game.load.image('baoshi',require('./assets/sprites/baoshi.png'));
+        game.load.image('gasoline',require('./assets/sprites/gasoline.png'));
+
         //加载资源进度条
         let progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
             fontSize: '60px',
@@ -114,3 +118,5 @@ window.onload = ()=>{
     game.state.add('level_4', new Level_4());
     game.state.add('end', new End());
 }
+
+
