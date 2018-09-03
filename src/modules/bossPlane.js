@@ -9,7 +9,6 @@ class BossPlane {
         this.plan = null;
         this.hp = 100;
         this.blood = 100;
-        this.left = true;
     }
 
     init(options){
@@ -49,7 +48,6 @@ class BossPlane {
                     }
                 }
             }
-            this.left = !this.left;
         });
     }
 
