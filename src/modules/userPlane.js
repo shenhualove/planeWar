@@ -20,7 +20,7 @@ class UserPlane {
 
         //战机可以拖拽
         this.plan.inputEnabled = true;
-        this.plan.input.enableDrag(false);
+        //this.plan.input.enableDrag(false);
         this.plan.scale.x = 1.3;
         this.plan.scale.y = 1.3;
         this.plan.body.collideWorldBounds = true;
@@ -29,38 +29,71 @@ class UserPlane {
     fireBullet(userBullet){
         //发射子弹
         if(game.time.now > this.bulletTime){
-            // 获取子弹组里的第一颗子弹
-            let bullet = userBullet.getFirstExists(false);
-
-            if(bullet){
-                bullet.reset(this.plan.x, this.plan.y - 8);
-                //子弹的 速度
-                bullet.body.velocity.y = -800;
-                //子弹的频率
-                this.bulletTime = game.time.now + 300;
-            }
-
+            //等级为1 的时候
+            this.setBullet({
+                x:this.plan.x,
+                y:this.plan.y-8,
+                bX:0,
+                bY:-900,
+                time:100,
+                userBullet
+            });
+            //等级为2
             if(this.level >= 2){
-                let bullet2 = userBullet.getFirstExists(false);
-                if(bullet2){
-                    bullet2.reset(this.plan.x, this.plan.y - 8);
-                    //子弹的 速度
-                    bullet2.body.velocity.y = -800;
-                    bullet2.body.velocity.x = -300;
-                    //子弹的频率
-                    this.bulletTime = game.time.now + 300;
-                }
-                let bullet3 = userBullet.getFirstExists(false);
-                if(bullet3){
-                    bullet3.reset(this.plan.x, this.plan.y - 8);
-                    //子弹的 速度
-                    bullet3.body.velocity.y = -800;
-                    bullet3.body.velocity.x = 300;
-                    //子弹的频率
-                    this.bulletTime = game.time.now + 300;
-                }
+                this.setBullet({
+                    x:this.plan.x-50,
+                    y:this.plan.y-8,
+                    bX:0,
+                    bY:-900,
+                    time:100,
+                    userBullet
+                });
+                this.setBullet({
+                    x:this.plan.x+50,
+                    y:this.plan.y-8,
+                    bX:0,
+                    bY:-900,
+                    time:100,
+                    userBullet
+                });
+            }
+            //等级为3
+            if(this.level >= 3){
+                this.setBullet({
+                    x:this.plan.x-80,
+                    y:this.plan.y-8,
+                    bX:-300,
+                    bY:-900,
+                    time:100,
+                    userBullet
+                });
+                this.setBullet({
+                    x:this.plan.x+80,
+                    y:this.plan.y-8,
+                    bX:300,
+                    bY:-900,
+                    time:100,
+                    userBullet
+                });
             }
         }
+    }
+
+    setBullet(opt){
+        let bullet = opt.userBullet.getFirstExists(false);
+        if(bullet){
+            bullet.reset(opt.x,opt.y);
+            //子弹的 速度
+            bullet.body.velocity.y = opt.bY;
+            bullet.body.velocity.x = opt.bX;
+            //子弹的频率
+            this.bulletTime = game.time.now + opt.time;
+        }
+    }
+
+    setPosition(result){
+        this.plan.x += result.x;
+        this.plan.y += result.y;
     }
 }
 

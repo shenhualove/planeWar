@@ -44,7 +44,7 @@ class BossPlane {
                         if(i!==0){
                             bullet.body.velocity.x = (i<8?-(width/8*i):width/8*(i-7));
                         }
-                        enemy['bulletTime'+i] = game.time.now + 1800;
+                        enemy['bulletTime'+i] = game.time.now + 1200;
                     }
                 }
             }

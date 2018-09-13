@@ -7,6 +7,7 @@ class Resource {
     constructor(){
         this.items = null;
         this.maxWidth = 0;
+        this.speed = 900;
     }
 
     init(options){
@@ -19,15 +20,18 @@ class Resource {
         this.items.setAll('checkWorldBounds', true);
         //产生敌人
         this.maxWidth = game.width - game.cache.getImage(options.pic).width;
-        game.time.events.loop(options.loopTime?options.loopTime:Phaser.Timer.SECOND , this.create,this);
+        if(!options.disableLoop){
+            game.time.events.loop(options.loopTime?options.loopTime:Phaser.Timer.SECOND , this.create,this);
+        }
+        options.speed && (this.speed = options.speed);
     }
 
     create(){
         let item = this.items.getFirstExists(false);
         if(item){
             item.scale.setTo(2,2);
-            item.reset(game.rnd.integerInRange(0, this.maxWidth), 0);
-            item.body.velocity.y = 600;
+            item.reset(game.rnd.integerInRange(0, this.maxWidth), 20);
+            item.body.velocity.y = this.speed;
         }
     }
 }

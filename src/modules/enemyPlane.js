@@ -36,7 +36,7 @@ class EnemyPlane {
         let enemy = this.plan.getFirstExists(false);
         if(enemy){
             enemy.hp = this.hp;
-            enemy.reset(game.rnd.integerInRange(0, this.maxWidth), 0);
+            enemy.reset(game.rnd.integerInRange(0, this.maxWidth), 120);
             enemy.body.velocity.y = this.speed;
         }
     }
@@ -47,7 +47,6 @@ class EnemyPlane {
             let bullet = enemyBullet.getFirstExists(false);
             if(bullet) {
                 if(game.time.now > (enemy.bulletTime || 0)) {
-                    bullet.angle =180;
                     bullet.reset(enemy.x, enemy.y + 38);
                     bullet.body.velocity.y = 800;
                     enemy.bulletTime = game.time.now + 600;

@@ -78,6 +78,10 @@ class GameMain {
         game.load.image('baoshi',require('./assets/sprites/baoshi.png'));
         game.load.image('gasoline',require('./assets/sprites/gasoline.png'));
 
+        //金币
+        game.load.image('yellowCoins',require('./assets/sprites/yellowCoins.png'));
+        game.load.image('redCoins',require('./assets/sprites/redCoins.png'));
+
         //加载资源进度条
         let progressText = game.add.text(game.world.centerX, game.world.centerY, '0%', {
             fontSize: '60px',
@@ -94,7 +98,7 @@ class GameMain {
         //开启物理系统 选择碰撞检测模式ARCADE
         game.physics.startSystem(Phaser.Physics.ARCADE);
         //游戏适配模式
-        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+        game.scale.scaleMode = Phaser.ScaleManager.RESIZE;
         //进入开始界面
         game.state.start('start');
     }
@@ -106,7 +110,15 @@ class GameMain {
 }
 
 window.onload = ()=>{
-    window.userData = {};
+    window.userData = {
+        plane:'',//用户战机选择
+        source:0,//用户总得分
+        shootPlane:0,//击落敌机总数
+        coinsNum:0,//金币总数
+        toConfirmCoins:[5,10,30,66],//每个关卡对应的金币
+        randCoins:[1,88],//通关成功后奖励的随机金币范围
+        allPass:false,//是否全部通关
+    };
     //创建游戏
     window.game = new GameMain().init(1024,1536);
 
